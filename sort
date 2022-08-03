@@ -1,0 +1,32 @@
+def partition(nums, low, high):
+    pivot = nums[(low + high) // 2]
+    i = low - 1
+    j = high + 1
+    while True:
+        i += 1
+        while nums[i] < pivot:
+            i += 1
+        j -= 1
+        while nums[j] > pivot:
+            j -= 1
+        if i >= j:
+            return j
+        nums[i], nums[j] = nums[j], nums[i]
+
+
+def quick_sort(nums):
+    def recursion(items, low, high):
+        if low < high:
+            index = partition(items, low, high)
+            recursion(items, low, index)
+            recursion(items, index + 1, high)
+
+    recursion(nums, 0, len(nums) - 1)
+
+
+random_list_of_nums = [2, 5, 1, 6, 3]
+quick_sort(random_list_of_nums)
+print(random_list_of_nums)
+
+# В среднем время выполнения быстрой сортировки составляет O(n log n). Но если опорный элемент равен наименьшему или
+# наибольшему элементам списка, функция будет работать медленно O(n²). Для функции не требуется дополнительная память.
